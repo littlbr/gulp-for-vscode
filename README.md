@@ -24,7 +24,7 @@ Le réglage se change aussi depuis la roue dentée en haut de la vue Gulp.
 ## Installation
 
 ```bash
-code --install-extension gulp-runner-0.2.3.vsix
+code --install-extension releases/gulp-runner-0.2.3.vsix
 ```
 
 Puis recharger la fenêtre VS Code.
@@ -37,7 +37,7 @@ Puis recharger la fenêtre VS Code.
 ## Construire le paquet
 
 ```bash
-npm run package   # produit dist/gulp-runner-<version>.vsix (aucune dépendance)
+npm run package   # produit releases/gulp-runner-<version>.vsix (aucune dépendance, fichier versionné dans le dépôt)
 ```
 
 ## Limites

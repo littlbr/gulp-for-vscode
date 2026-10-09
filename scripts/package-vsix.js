@@ -6,7 +6,7 @@ const { execFileSync } = require("child_process");
 
 const root = path.resolve(__dirname, "..");
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-const out = path.join(root, "dist", `${pkg.name}-${pkg.version}.vsix`);
+const out = path.join(root, "releases", `${pkg.name}-${pkg.version}.vsix`);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "vsix-"));
 
 fs.mkdirSync(path.join(tmp, "extension"));
