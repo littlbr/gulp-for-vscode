@@ -63,7 +63,7 @@ class Runner {
             { type: TASK_TYPE, folder: folder.uri.fsPath, task: name },
             folder,
             `gulp ${name}`,
-            "Gulp Runner",
+            "Gulp for VS Code",
             new vscode.CustomExecution(async () => {
                 pty = new GulpPty(folder.uri.fsPath, command, events);
                 return pty;

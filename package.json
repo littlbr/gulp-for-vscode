@@ -1,8 +1,8 @@
 {
-    "name": "gulp-runner",
-    "displayName": "Gulp Runner",
+    "name": "gulp-for-vscode",
+    "displayName": "Gulp for VS Code",
     "description": "Liste les tâches Gulp, les lance, les arrête et les relance, avec un statut clair.",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "publisher": "mcube",
     "license": "UNLICENSED",
     "private": true,
@@ -25,7 +25,7 @@
             ]
         },
         "configuration": {
-            "title": "Gulp Runner",
+            "title": "Gulp for VS Code",
             "properties": {
                 "gulpRunner.statusBarClickAction": {
                     "type": "string",

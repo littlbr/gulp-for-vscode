@@ -1,4 +1,4 @@
-# Gulp Runner
+# Gulp for VS Code
 
 Extension VS Code minimaliste : liste les tâches Gulp du projet, les lance, les arrête et les relance, avec un statut clair.
 
@@ -24,7 +24,7 @@ Le réglage se change aussi depuis la roue dentée en haut de la vue Gulp.
 ## Installation
 
 ```bash
-code --install-extension releases/gulp-runner-0.2.3.vsix
+code --install-extension releases/gulp-for-vscode-0.2.4.vsix
 ```
 
 Puis recharger la fenêtre VS Code.
@@ -37,7 +37,7 @@ Puis recharger la fenêtre VS Code.
 ## Construire le paquet
 
 ```bash
-npm run package   # produit releases/gulp-runner-<version>.vsix (aucune dépendance, fichier versionné dans le dépôt)
+npm run package   # produit releases/gulp-for-vscode-<version>.vsix (aucune dépendance, fichier versionné dans le dépôt)
 ```
 
 ## Limites
