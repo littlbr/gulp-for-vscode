@@ -4,6 +4,8 @@ const { spawn } = require("child_process");
 const ANSI = /\x1b\[[0-9;?]*[ -/]*[@-~]/g;
 const SHELL_NOISE = /no job control|cannot set terminal process group|Inappropriate ioctl/i;
 const ERROR_LINE = /\bError\b\s*:|✘ \[ERROR\]|errored after/i;
+// URLs BrowserSync du site (Local, External) ; celles de l'interface d'admin (UI, UI External) sont ignorées.
+const BROWSERSYNC_URL = /(?<!UI )\b(Local|External)\s*:\s*(https?:\/\/[^\s'"]+)/i;
 const STARTING = /Starting '([^']+)'/;
 const FINISHED = /Finished '([^']+)'/;
 const ERRORED = /'([^']+)' errored after/;
@@ -13,7 +15,7 @@ const BACKGROUND_AFTER_MS = 5000;
 /**
  * Terminal pseudo : lance gulp dans un shell de connexion (PATH identique à un terminal),
  * relaie la sortie telle quelle et la lit ligne à ligne pour détecter les erreurs de compilation.
- * `events` : { onError(message), onClear(), onExit(code) }.
+ * `events` : { onError(message), onClear(), onExit(code), onUrl(label, url) }.
  */
 class GulpPty {
     constructor(cwd, command, events) {
@@ -91,7 +93,12 @@ class GulpPty {
     }
 
     _analyse(line) {
-        let m = STARTING.exec(line);
+        let m = BROWSERSYNC_URL.exec(line);
+        if (m) {
+            this.events.onUrl(m[1], m[2]);
+            return;
+        }
+        m = STARTING.exec(line);
         if (m) {
             this._dropBackgroundTasks();
             this.active.set(m[1], Date.now());

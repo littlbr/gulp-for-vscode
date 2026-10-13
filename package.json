@@ -2,16 +2,19 @@
     "name": "gulp-for-vscode",
     "displayName": "Gulp for VS Code",
     "description": "Liste les tâches Gulp, les lance, les arrête et les relance, avec un statut clair.",
-    "version": "0.2.4",
-    "publisher": "mcube",
-    "license": "UNLICENSED",
-    "private": true,
+    "version": "0.3.0",
+    "publisher": "digital-cover",
+    "author": { "name": "Digital Cover", "url": "https://www.digital-cover.fr" },
+    "homepage": "https://www.digital-cover.fr",
+    "license": "MIT",
+    "icon": "media/icon.png",
     "engines": { "vscode": "^1.90.0" },
     "categories": ["Other"],
+    "keywords": ["gulp", "task", "runner", "watch"],
     "main": "./src/extension.js",
     "activationEvents": ["onStartupFinished"],
     "scripts": {
-        "package": "node scripts/package-vsix.js"
+        "package": "npx @vscode/vsce package --allow-missing-repository --out releases/"
     },
     "contributes": {
         "viewsContainers": {
@@ -21,7 +24,7 @@
         },
         "views": {
             "gulpRunner": [
-                { "id": "gulpRunner.tasks", "name": "Tâches Gulp" }
+                { "id": "gulpRunner.tasks", "name": "Tâches Gulp", "type": "webview" }
             ]
         },
         "configuration": {
@@ -39,20 +42,9 @@
                 }
             }
         },
-        "viewsWelcome": [
-            {
-                "view": "gulpRunner.tasks",
-                "contents": "Aucun gulpfile détecté dans ce dossier.\n[Rafraîchir](command:gulpRunner.refresh)"
-            }
-        ],
         "commands": [
-            { "command": "gulpRunner.start", "title": "Gulp : lancer", "icon": "$(play)" },
-            { "command": "gulpRunner.stop", "title": "Gulp : arrêter", "icon": "$(debug-stop)" },
-            { "command": "gulpRunner.restart", "title": "Gulp : relancer", "icon": "$(debug-restart)" },
-            { "command": "gulpRunner.showOutput", "title": "Gulp : afficher la console", "icon": "$(terminal)" },
             { "command": "gulpRunner.configureStatusBar", "title": "Gulp : action au clic sur la barre d'état", "icon": "$(gear)" },
             { "command": "gulpRunner.statusBarClick", "title": "Gulp : clic sur la barre d'état" },
-            { "command": "gulpRunner.open", "title": "Gulp : ouvrir la tâche" },
             { "command": "gulpRunner.refresh", "title": "Gulp : rafraîchir les tâches", "icon": "$(refresh)" }
         ],
         "menus": {
@@ -60,18 +52,7 @@
                 { "command": "gulpRunner.configureStatusBar", "when": "view == gulpRunner.tasks", "group": "navigation@2" },
                 { "command": "gulpRunner.refresh", "when": "view == gulpRunner.tasks", "group": "navigation@1" }
             ],
-            "view/item/context": [
-                { "command": "gulpRunner.start", "when": "view == gulpRunner.tasks && viewItem =~ /^gulpTask\\.(idle|error)$/", "group": "inline@1" },
-                { "command": "gulpRunner.restart", "when": "view == gulpRunner.tasks && viewItem == gulpTask.running", "group": "inline@1" },
-                { "command": "gulpRunner.stop", "when": "view == gulpRunner.tasks && viewItem == gulpTask.running", "group": "inline@2" },
-                { "command": "gulpRunner.showOutput", "when": "view == gulpRunner.tasks && viewItem =~ /^gulpTask\\.(running|error)$/", "group": "inline@0" }
-            ],
             "commandPalette": [
-                { "command": "gulpRunner.start", "when": "false" },
-                { "command": "gulpRunner.stop", "when": "false" },
-                { "command": "gulpRunner.restart", "when": "false" },
-                { "command": "gulpRunner.showOutput", "when": "false" },
-                { "command": "gulpRunner.open", "when": "false" },
                 { "command": "gulpRunner.statusBarClick", "when": "false" }
             ]
         }

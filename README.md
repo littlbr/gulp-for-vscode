@@ -4,11 +4,13 @@ Extension VS Code minimaliste : liste les tâches Gulp du projet, les lance, les
 
 ## Fonctions
 
-- Vue **Gulp** dans la barre d'activités : une ligne par tâche détectée (`gulp --tasks-simple`).
+- Vue **Gulp** dans la barre d'activités : une carte par tâche détectée (`gulp --tasks-simple`).
 - ▶ lancer, puis ■ arrêter et ⟳ relancer quand la tâche tourne.
 - Statut par tâche : arrêtée, en cours (avec la durée), en erreur (code de sortie) ou en cours avec une erreur de compilation (watch toujours actif). L'erreur disparaît au prochain build réussi.
 - Indicateur coloré dans la barre d'état (vert : en cours, rouge : erreur).
 - Clic sur une tâche : affiche son terminal (console et erreurs). Double clic sur une tâche arrêtée : la lance. Un bouton terminal apparaît aussi sur les tâches en cours ou en erreur.
+- Le lancement n'ouvre pas le panneau terminal.
+- URLs BrowserSync (Local, External, UI) affichées sous la tâche en cours : clic pour ouvrir dans le navigateur, bouton pour copier l'adresse.
 - Détection relancée automatiquement quand le `gulpfile` change.
 
 ## Réglage
@@ -24,7 +26,7 @@ Le réglage se change aussi depuis la roue dentée en haut de la vue Gulp.
 ## Installation
 
 ```bash
-code --install-extension releases/gulp-for-vscode-0.2.4.vsix
+code --install-extension releases/gulp-for-vscode-0.3.0.vsix
 ```
 
 Puis recharger la fenêtre VS Code.
@@ -37,7 +39,7 @@ Puis recharger la fenêtre VS Code.
 ## Construire le paquet
 
 ```bash
-npm run package   # produit releases/gulp-for-vscode-<version>.vsix (aucune dépendance, fichier versionné dans le dépôt)
+npm run package   # produit releases/gulp-for-vscode-<version>.vsix (via @vscode/vsce, fichier versionné dans le dépôt)
 ```
 
 ## Limites

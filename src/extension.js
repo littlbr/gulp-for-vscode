@@ -1,12 +1,12 @@
 const vscode = require("vscode");
 const { detectTasks, hasGulpfile } = require("./detect");
 const { Runner } = require("./runner");
-const { TaskTree } = require("./tree");
+const { TaskView } = require("./view");
 const { StatusBar } = require("./status");
 
 async function activate(context) {
     const runner = new Runner();
-    const tree = new TaskTree(runner);
+    const view = new TaskView(context, runner);
     const status = new StatusBar(runner);
 
     const refresh = async () => {
@@ -14,36 +14,14 @@ async function activate(context) {
         const groups = await Promise.all(
             folders.map(async (folder) => ({ folder, tasks: await detectTasks(folder) }))
         );
-        tree.setGroups(groups);
-    };
-
-    // Double clic sur une tâche arrêtée ou en erreur : la lancer. Simple clic : afficher sa console.
-    let lastClick = { key: null, time: 0 };
-    const open = (item) => {
-        if (!item) {
-            return;
-        }
-        const key = `${item.folder.uri.fsPath}::${item.task}`;
-        const now = Date.now();
-        const isDouble = lastClick.key === key && now - lastClick.time < 500;
-        lastClick = { key, time: now };
-        if (isDouble && runner.state(item.folder, item.task).status !== "running") {
-            runner.start(item.folder, item.task);
-        } else {
-            runner.showOutput(item.folder, item.task);
-        }
+        view.setGroups(groups);
     };
 
     context.subscriptions.push(
         runner,
-        tree,
+        view,
         status,
-        vscode.window.registerTreeDataProvider("gulpRunner.tasks", tree),
-        vscode.commands.registerCommand("gulpRunner.start", (item) => item && runner.start(item.folder, item.task)),
-        vscode.commands.registerCommand("gulpRunner.stop", (item) => item && runner.stop(item.folder, item.task)),
-        vscode.commands.registerCommand("gulpRunner.restart", (item) => item && runner.restart(item.folder, item.task)),
-        vscode.commands.registerCommand("gulpRunner.showOutput", (item) => item && runner.showOutput(item.folder, item.task)),
-        vscode.commands.registerCommand("gulpRunner.open", open),
+        vscode.window.registerWebviewViewProvider("gulpRunner.tasks", view),
         vscode.commands.registerCommand("gulpRunner.statusBarClick", () => {
             const action = vscode.workspace.getConfiguration("gulpRunner").get("statusBarClickAction");
             if (action === "terminal") {

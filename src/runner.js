@@ -12,6 +12,8 @@ const keyOf = (folder, task) => `${folder.uri.fsPath}::${task}`;
 class Runner {
     constructor() {
         this.states = new Map();
+        this.urls = new Map();
+        this.ptys = new Set();
         this.waiters = new Map();
         this._onDidChange = new vscode.EventEmitter();
         this.onDidChange = this._onDidChange.event;
@@ -26,11 +28,19 @@ class Runner {
     }
 
     dispose() {
+        // Rechargement de la fenêtre ou fermeture : gulp tourne dans son propre groupe de processus
+        // et survivrait à l'extension (ports BrowserSync gardés), on l'arrête explicitement.
+        this.ptys.forEach((pty) => pty.stop());
         this.disposables.forEach((d) => d.dispose());
     }
 
     state(folder, task) {
         return this.states.get(keyOf(folder, task)) || { status: "idle" };
+    }
+
+    /** URLs BrowserSync détectées dans la sortie de la tâche : [{ label, url }]. */
+    urlsOf(folder, task) {
+        return this.urls.get(keyOf(folder, task)) || [];
     }
 
     runningTasks() {
@@ -48,7 +58,9 @@ class Runner {
             return;
         }
         const command = name === "default" ? "npx gulp" : `npx gulp ${name}`;
+        this.urls.delete(key);
         const events = {
+            onUrl: (label, url) => this._addUrl(key, label, url),
             onError: (message) => this._setError(key, message),
             onClear: () => this._clearError(key),
             onExit: (code) => {
@@ -66,12 +78,14 @@ class Runner {
             "Gulp for VS Code",
             new vscode.CustomExecution(async () => {
                 pty = new GulpPty(folder.uri.fsPath, command, events);
+                this.ptys.add(pty);
+                pty.onDidClose(() => this.ptys.delete(pty));
                 return pty;
             })
         );
         task.isBackground = true;
         task.presentationOptions = {
-            reveal: vscode.TaskRevealKind.Always,
+            reveal: vscode.TaskRevealKind.Silent,
             focus: false,
             panel: vscode.TaskPanelKind.Dedicated,
             clear: true,
@@ -86,6 +100,15 @@ class Runner {
             hasError: false,
         });
         this._onDidChange.fire();
+    }
+
+    _addUrl(key, label, url) {
+        const urls = this.urls.get(key) || [];
+        if (!urls.some((u) => u.url === url)) {
+            urls.push({ label, url });
+            this.urls.set(key, urls);
+            this._onDidChange.fire();
+        }
     }
 
     _setError(key, message) {
@@ -168,6 +191,7 @@ class Runner {
             return;
         }
         const key = `${task.definition.folder}::${task.definition.task}`;
+        this.urls.delete(key);
         const failed = !state.stopping && state.exitCode !== undefined && state.exitCode !== 0;
         this.states.set(key, {
             status: failed ? "error" : "idle",
