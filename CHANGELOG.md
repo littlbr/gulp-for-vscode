@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.5
+
+- Badges du README : version et installations du Marketplace.
+
 ## 0.3.4
 
 - README complet avec capture d'écran, et projets de démonstration.

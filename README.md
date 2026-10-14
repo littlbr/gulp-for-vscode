@@ -1,7 +1,7 @@
 # Gulp for VS Code
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/digital-cover.gulp-for-vscode?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=digital-cover.gulp-for-vscode)
-[![Installations](https://img.shields.io/visual-studio-marketplace/i/digital-cover.gulp-for-vscode)](https://marketplace.visualstudio.com/items?itemName=digital-cover.gulp-for-vscode)
+[![Version](https://vsmarketplacebadges.dev/version-short/digital-cover.gulp-for-vscode.svg)](https://marketplace.visualstudio.com/items?itemName=digital-cover.gulp-for-vscode)
+[![Installations](https://vsmarketplacebadges.dev/installs-short/digital-cover.gulp-for-vscode.svg)](https://marketplace.visualstudio.com/items?itemName=digital-cover.gulp-for-vscode)
 [![Licence](https://img.shields.io/github/license/littlbr/gulp-for-vscode)](LICENSE)
 
 Les tâches Gulp du projet dans une vue dédiée : les lancer, les arrêter, les relancer, et voir d'un coup d'œil lesquelles tournent, lesquelles ont échoué et à quelle adresse BrowserSync sert le site.
@@ -36,7 +36,7 @@ code --install-extension digital-cover.gulp-for-vscode
 Ou depuis un paquet local, fourni dans [releases/](releases/) :
 
 ```bash
-code --install-extension releases/gulp-for-vscode-0.3.4.vsix
+code --install-extension releases/gulp-for-vscode-0.3.5.vsix
 ```
 
 ## Utilisation

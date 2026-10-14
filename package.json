@@ -2,7 +2,7 @@
     "name": "gulp-for-vscode",
     "displayName": "Gulp for VS Code",
     "description": "Liste les tâches Gulp, les lance, les arrête et les relance, avec un statut clair.",
-    "version": "0.3.4",
+    "version": "0.3.5",
     "publisher": "digital-cover",
     "author": { "name": "Martin Vauchel", "url": "https://github.com/littlbr" },
     "homepage": "https://github.com/littlbr/gulp-for-vscode#readme",
