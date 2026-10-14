@@ -2,10 +2,12 @@
     "name": "gulp-for-vscode",
     "displayName": "Gulp for VS Code",
     "description": "Liste les tâches Gulp, les lance, les arrête et les relance, avec un statut clair.",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "publisher": "digital-cover",
-    "author": { "name": "Digital Cover", "url": "https://www.digital-cover.fr" },
-    "homepage": "https://www.digital-cover.fr",
+    "author": { "name": "Martin Vauchel", "url": "https://github.com/littlbr" },
+    "homepage": "https://github.com/littlbr/gulp-for-vscode#readme",
+    "repository": { "type": "git", "url": "https://github.com/littlbr/gulp-for-vscode.git" },
+    "bugs": { "url": "https://github.com/littlbr/gulp-for-vscode/issues" },
     "license": "MIT",
     "icon": "media/icon.png",
     "engines": { "vscode": "^1.90.0" },
@@ -14,7 +16,7 @@
     "main": "./src/extension.js",
     "activationEvents": ["onStartupFinished"],
     "scripts": {
-        "package": "npx @vscode/vsce package --allow-missing-repository --out releases/"
+        "package": "npx @vscode/vsce package --out releases/"
     },
     "contributes": {
         "viewsContainers": {

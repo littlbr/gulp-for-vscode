@@ -2,3 +2,4 @@
 releases/**
 scripts/**
 .vscodeignore
+.gitignore

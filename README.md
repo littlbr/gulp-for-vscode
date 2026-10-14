@@ -25,8 +25,16 @@ Le réglage se change aussi depuis la roue dentée en haut de la vue Gulp.
 
 ## Installation
 
+Depuis le Marketplace : rechercher **Gulp for VS Code** dans la vue Extensions, ou :
+
 ```bash
-code --install-extension releases/gulp-for-vscode-0.3.2.vsix
+code --install-extension digital-cover.gulp-for-vscode
+```
+
+Ou depuis un paquet local :
+
+```bash
+code --install-extension releases/gulp-for-vscode-0.3.3.vsix
 ```
 
 Puis recharger la fenêtre VS Code.
