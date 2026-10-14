@@ -2,7 +2,7 @@
     "name": "gulp-for-vscode",
     "displayName": "Gulp for VS Code",
     "description": "Liste les tâches Gulp, les lance, les arrête et les relance, avec un statut clair.",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "publisher": "digital-cover",
     "author": { "name": "Digital Cover", "url": "https://www.digital-cover.fr" },
     "homepage": "https://www.digital-cover.fr",

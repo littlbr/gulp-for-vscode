@@ -26,7 +26,7 @@ Le réglage se change aussi depuis la roue dentée en haut de la vue Gulp.
 ## Installation
 
 ```bash
-code --install-extension releases/gulp-for-vscode-0.3.0.vsix
+code --install-extension releases/gulp-for-vscode-0.3.1.vsix
 ```
 
 Puis recharger la fenêtre VS Code.
