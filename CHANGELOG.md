@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.6
+
+- README en anglais, suivi de la version française.
+
 ## 0.3.5
 
 - Badges du README : version et installations du Marketplace.
