@@ -1,0 +1,6 @@
+{
+    "name": "boutique-nova",
+    "private": true,
+    "description": "Projet fictif de démonstration pour Gulp for VS Code.",
+    "devDependencies": { "gulp": "^5.0.0" }
+}

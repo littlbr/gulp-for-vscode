@@ -1,0 +1,34 @@
+// Atelier Lumen : styles principaux (projet fictif)
+$ink: #1d1b26;
+$light: #f6f1e7;
+$accent: #e0a526;
+
+:root {
+    --gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    color: $ink;
+    background: $light;
+}
+
+.hero {
+    display: grid;
+    gap: var(--gap);
+    padding: calc(var(--gap) * 2) var(--gap);
+
+    &__title {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        line-height: 1.05;
+    }
+
+    &__cta {
+        justify-self: start;
+        padding: 0.75em 1.5em;
+        border-radius: 999px;
+        background: $accent;
+        color: $ink;
+    }
+}

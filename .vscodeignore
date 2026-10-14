@@ -3,3 +3,5 @@ releases/**
 scripts/**
 .vscodeignore
 .gitignore
+demo/**
+docs/**

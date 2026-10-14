@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4
+
+- README complet avec capture d'écran, et projets de démonstration.
+
 ## 0.3.3
 
 - Dépôt public sur GitHub : liens vers le code source et le suivi des problèmes.

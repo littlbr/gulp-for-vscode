@@ -1,0 +1,6 @@
+{
+    "folders": [{ "path": "atelier-lumen" }, { "path": "boutique-nova" }],
+    "settings": {
+        "files.exclude": { "**/node_modules": true, "**/package-lock.json": true }
+    }
+}
