@@ -2,6 +2,7 @@ const vscode = require("vscode");
 const { GulpPty } = require("./pty");
 
 const TASK_TYPE = "gulpRunner";
+const URL_ORDER = ["proxying", "local", "external"];
 
 const keyOf = (folder, task) => `${folder.uri.fsPath}::${task}`;
 
@@ -103,19 +104,11 @@ class Runner {
     }
 
     _addUrl(key, label, url) {
-        // Le site répond aussi sans BrowserSync sur le port par défaut : seule l'URL Local garde le port de gulp.
-        if (label.toLowerCase() === "external") {
-            try {
-                const parsed = new URL(url);
-                parsed.port = "";
-                url = parsed.toString();
-            } catch (e) {
-                // URL inattendue : gardée telle quelle
-            }
-        }
         const urls = this.urls.get(key) || [];
         if (!urls.some((u) => u.url === url)) {
             urls.push({ label, url });
+            // Ordre fixe quel que soit l'ordre d'arrivée : vhost, Local, External.
+            urls.sort((a, b) => URL_ORDER.indexOf(a.label.toLowerCase()) - URL_ORDER.indexOf(b.label.toLowerCase()));
             this.urls.set(key, urls);
             this._onDidChange.fire();
         }

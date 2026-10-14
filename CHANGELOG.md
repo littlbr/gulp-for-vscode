@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- URLs BrowserSync : vhost proxifié, Local et External (avec son port), dans cet ordre.
+
 ## 0.4.0
 
 - Version anglaise de l'extension : l'interface suit la langue d'affichage de VS Code (anglais par défaut, français).

@@ -21,7 +21,7 @@ Your project's Gulp tasks in a dedicated view: start them, stop them, restart th
   - *running*, with the elapsed time;
   - *error, code N* when the task exited with a failure;
   - *compilation error* when a watch is still active but a build failed (Sass, esbuild…). The error message is shown under the task and goes away on the next successful build.
-- **BrowserSync URLs**: the Local and External addresses are shown under the running task. Click to open the site in the browser, or use the button to copy the address.
+- **BrowserSync URLs**: the proxied vhost, Local and External addresses are shown under the running task. Click to open the site in the browser, or use the button to copy the address.
 - **Quiet terminal**: starting a task does not open the terminal panel. Click a task to show its console, click again to close it.
 - **Status bar**: a green indicator while a task is running, red on error, with details in the tooltip.
 - **Badge on the Gulp icon**: the number of failed tasks, otherwise the number of running tasks.
@@ -134,7 +134,7 @@ Les tâches Gulp du projet dans une vue dédiée : les lancer, les arrêter, les
   - *en cours*, avec la durée écoulée ;
   - *erreur, code N* quand la tâche s'est terminée en échec ;
   - *erreur de compilation* quand un watch reste actif mais qu'un build a échoué (Sass, esbuild…). Le message d'erreur s'affiche sous la tâche et disparaît au build réussi suivant.
-- **URLs BrowserSync** : les adresses Local et External s'affichent sous la tâche en cours. Un clic ouvre le site dans le navigateur, le bouton copie l'adresse.
+- **URLs BrowserSync** : le vhost proxifié et les adresses Local et External s'affichent sous la tâche en cours. Un clic ouvre le site dans le navigateur, le bouton copie l'adresse.
 - **Terminal discret** : le lancement n'ouvre pas le panneau terminal. Un clic sur une tâche affiche sa console, un second clic la referme.
 - **Barre d'état** : un indicateur vert quand une tâche tourne, rouge en cas d'erreur, avec le détail en infobulle.
 - **Pastille sur l'icône Gulp** : le nombre de tâches en erreur, sinon le nombre de tâches en cours.

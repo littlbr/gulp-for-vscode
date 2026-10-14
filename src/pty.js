@@ -4,8 +4,8 @@ const { spawn } = require("child_process");
 const ANSI = /\x1b\[[0-9;?]*[ -/]*[@-~]/g;
 const SHELL_NOISE = /no job control|cannot set terminal process group|Inappropriate ioctl/i;
 const ERROR_LINE = /\bError\b\s*:|✘ \[ERROR\]|errored after/i;
-// URLs BrowserSync du site (Local, External) ; celles de l'interface d'admin (UI, UI External) sont ignorées.
-const BROWSERSYNC_URL = /(?<!UI )\b(Local|External)\s*:\s*(https?:\/\/[^\s'"]+)/i;
+// URLs BrowserSync du site (vhost proxifié, Local, External) ; celles de l'interface d'admin (UI, UI External) sont ignorées.
+const BROWSERSYNC_URL = /(?<!UI )\b(Proxying|Local|External)\s*:\s*(https?:\/\/[^\s'"]+)/i;
 const STARTING = /Starting '([^']+)'/;
 const FINISHED = /Finished '([^']+)'/;
 const ERRORED = /'([^']+)' errored after/;
