@@ -103,6 +103,16 @@ class Runner {
     }
 
     _addUrl(key, label, url) {
+        // Le site répond aussi sans BrowserSync sur le port par défaut : seule l'URL Local garde le port de gulp.
+        if (label.toLowerCase() === "external") {
+            try {
+                const parsed = new URL(url);
+                parsed.port = "";
+                url = parsed.toString();
+            } catch (e) {
+                // URL inattendue : gardée telle quelle
+            }
+        }
         const urls = this.urls.get(key) || [];
         if (!urls.some((u) => u.url === url)) {
             urls.push({ label, url });
