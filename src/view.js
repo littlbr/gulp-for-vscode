@@ -12,7 +12,10 @@ class TaskView {
         this.groups = [];
         this.view = null;
         this.lastClick = { key: null, time: 0 };
-        this.subscription = runner.onDidChange(() => this._post());
+        this.subscription = runner.onDidChange(() => {
+            this._post();
+            this._badge();
+        });
     }
 
     dispose() {
@@ -34,6 +37,26 @@ class TaskView {
         view.onDidDispose(() => {
             this.view = null;
         });
+        this._badge();
+    }
+
+    // Pastille sur l'icône Gulp de la barre d'activité : nombre de tâches en erreur, sinon en cours.
+    // Sa couleur dépend du thème (activityBarBadge.background) : l'erreur se lit dans l'infobulle.
+    _badge() {
+        if (!this.view) {
+            return;
+        }
+        const errors = this.runner.errorTasks();
+        const running = this.runner.runningTasks();
+        if (errors.length) {
+            const names = errors.map((s) => s.name).join(", ");
+            this.view.badge = { value: errors.length, tooltip: `Gulp en erreur : ${names}` };
+        } else if (running.length) {
+            const names = running.map((s) => s.name).join(", ");
+            this.view.badge = { value: running.length, tooltip: `Gulp en cours : ${names}` };
+        } else {
+            this.view.badge = undefined;
+        }
     }
 
     _post() {
