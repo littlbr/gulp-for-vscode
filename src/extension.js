@@ -35,10 +35,10 @@ async function activate(context) {
             const current = config.get("statusBarClickAction");
             const picked = await vscode.window.showQuickPick(
                 [
-                    { label: "Afficher la vue Gulp", value: "view" },
-                    { label: "Afficher ou masquer le terminal de la tâche", value: "terminal" },
-                ].map((entry) => ({ ...entry, description: entry.value === current ? "actuel" : "" })),
-                { title: "Action au clic sur l'indicateur Gulp de la barre d'état" }
+                    { label: vscode.l10n.t("Show the Gulp view"), value: "view" },
+                    { label: vscode.l10n.t("Show or hide the task terminal"), value: "terminal" },
+                ].map((entry) => ({ ...entry, description: entry.value === current ? vscode.l10n.t("current") : "" })),
+                { title: vscode.l10n.t("Action when clicking the Gulp indicator in the status bar") }
             );
             if (picked) {
                 await config.update("statusBarClickAction", picked.value, vscode.ConfigurationTarget.Global);

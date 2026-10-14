@@ -1,4 +1,4 @@
-// Atelier Lumen : scripts (projet fictif)
+// Atelier Lumen: scripts (demo project)
 document.querySelectorAll("[data-reveal]").forEach((node) => {
     new IntersectionObserver(([entry], observer) => {
         if (entry.isIntersecting) {

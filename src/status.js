@@ -21,21 +21,25 @@ class StatusBar {
 
         if (errors.length) {
             const compile = errors.some((s) => s.status === "running");
-            this.item.text = compile ? `$(error) Gulp : erreur de compilation` : `$(error) Gulp : erreur`;
+            this.item.text = `$(error) ${compile ? vscode.l10n.t("Gulp: compilation error") : vscode.l10n.t("Gulp: error")}`;
             this.item.tooltip = errors
-                .map((s) => (s.status === "running" ? `${s.name} : ${s.lastError || "erreur de compilation"}` : `${s.name} (code ${s.exitCode})`))
+                .map((s) =>
+                    s.status === "running"
+                        ? vscode.l10n.t("{0}: {1}", s.name, s.lastError || vscode.l10n.t("compilation error"))
+                        : vscode.l10n.t("{0} (code {1})", s.name, s.exitCode)
+                )
                 .join("\n");
             this.item.color = undefined;
             this.item.backgroundColor = new vscode.ThemeColor("statusBarItem.errorBackground");
         } else if (running.length) {
             const names = running.map((s) => s.name).join(", ");
-            this.item.text = `$(circle-filled) Gulp : ${names}`;
-            this.item.tooltip = "Gulp en cours. Cliquer pour agir (voir le réglage « gulpRunner.statusBarClickAction »).";
+            this.item.text = `$(circle-filled) ${vscode.l10n.t("Gulp: {0}", names)}`;
+            this.item.tooltip = vscode.l10n.t("Gulp is running. Click to act (see the \"gulpRunner.statusBarClickAction\" setting).");
             this.item.color = new vscode.ThemeColor("charts.green");
             this.item.backgroundColor = undefined;
         } else {
             this.item.text = `$(circle-outline) Gulp`;
-            this.item.tooltip = "Aucune tâche Gulp en cours.";
+            this.item.tooltip = vscode.l10n.t("No Gulp task running.");
             this.item.color = undefined;
             this.item.backgroundColor = undefined;
         }

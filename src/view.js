@@ -50,10 +50,10 @@ class TaskView {
         const running = this.runner.runningTasks();
         if (errors.length) {
             const names = errors.map((s) => s.name).join(", ");
-            this.view.badge = { value: errors.length, tooltip: `Gulp en erreur : ${names}` };
+            this.view.badge = { value: errors.length, tooltip: vscode.l10n.t("Gulp failed: {0}", names) };
         } else if (running.length) {
             const names = running.map((s) => s.name).join(", ");
-            this.view.badge = { value: running.length, tooltip: `Gulp en cours : ${names}` };
+            this.view.badge = { value: running.length, tooltip: vscode.l10n.t("Gulp running: {0}", names) };
         } else {
             this.view.badge = undefined;
         }
@@ -97,7 +97,7 @@ class TaskView {
         }
         if (message.type === "copyUrl") {
             vscode.env.clipboard.writeText(message.url);
-            vscode.window.setStatusBarMessage(`Copié : ${message.url}`, 2000);
+            vscode.window.setStatusBarMessage(vscode.l10n.t("Copied: {0}", message.url), 2000);
             return;
         }
         const group = this.groups.find((g) => g.folder.uri.fsPath === message.path);
@@ -138,12 +138,33 @@ class TaskView {
         }
     }
 
+    // Libellés de la webview, traduits côté extension (vscode.l10n n'existe pas dans la webview).
+    _strings() {
+        const t = vscode.l10n.t;
+        return {
+            compileError: t("compilation error"),
+            running: t("running"),
+            errorCode: t("error, code {0}"),
+            stopped: t("stopped"),
+            open: t("Open {0}"),
+            copy: t("Copy address"),
+            clickTerminal: t("Click: show terminal"),
+            doubleClickStart: t("Double-click: start task"),
+            showTerminal: t("Show terminal"),
+            restart: t("Restart"),
+            stop: t("Stop"),
+            start: t("Start"),
+            empty: t("No gulpfile found in this folder."),
+            refresh: t("Refresh"),
+        };
+    }
+
     _html(webview, media) {
         const nonce = crypto.randomBytes(16).toString("base64");
         const css = webview.asWebviewUri(vscode.Uri.joinPath(media, "view.css"));
         const js = webview.asWebviewUri(vscode.Uri.joinPath(media, "view.js"));
         return `<!DOCTYPE html>
-<html lang="fr">
+<html lang="${vscode.env.language}">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
@@ -151,11 +172,15 @@ class TaskView {
 <link rel="stylesheet" href="${css}">
 </head>
 <body>
-<main id="app"></main>
+<main id="app" data-strings="${escapeHtml(JSON.stringify(this._strings()))}"></main>
 <script nonce="${nonce}" src="${js}"></script>
 </body>
 </html>`;
     }
+}
+
+function escapeHtml(text) {
+    return text.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 }
 
 module.exports = { TaskView };

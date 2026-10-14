@@ -10,7 +10,7 @@ Your project's Gulp tasks in a dedicated view: start them, stop them, restart th
 
 ![Gulp for VS Code: task view, BrowserSync URLs, terminal and status bar indicator](docs/screenshot.png)
 
-*Screenshot taken on the [demo projects](demo/): `default` is running with BrowserSync, `lint` failed. The extension's interface is in French.*
+*Screenshot taken on the [demo projects](demo/): `default` is running with BrowserSync, `lint` failed.*
 
 ## Features
 
@@ -26,6 +26,7 @@ Your project's Gulp tasks in a dedicated view: start them, stop them, restart th
 - **Status bar**: a green indicator while a task is running, red on error, with details in the tooltip.
 - **Badge on the Gulp icon**: the number of failed tasks, otherwise the number of running tasks.
 - **Automatic detection**: the list updates when a `gulpfile` is created, changed or deleted.
+- **English and French**: the interface follows VS Code's display language.
 
 ## Installation
 
@@ -38,7 +39,7 @@ code --install-extension digital-cover.gulp-for-vscode
 Or from a local package, available in [releases/](releases/):
 
 ```bash
-code --install-extension releases/gulp-for-vscode-0.3.6.vsix
+code --install-extension releases/gulp-for-vscode-0.4.0.vsix
 ```
 
 ## Usage
@@ -64,8 +65,8 @@ The buttons at the top of the view refresh the task list and set the status bar 
 
 | Command | Description |
 | --- | --- |
-| `Gulp : rafraîchir les tâches` | Runs task detection again |
-| `Gulp : action au clic sur la barre d'état` | Chooses what clicking the indicator does |
+| `Gulp: Refresh Tasks` | Runs task detection again |
+| `Gulp: Status Bar Click Action` | Chooses what clicking the indicator does |
 
 ## Requirements
 
@@ -90,6 +91,7 @@ src/
   view.js        sidebar webview
   status.js      status bar indicator
 media/           icons, CSS and JS for the view
+l10n/            French translations (package.nls.*.json for the manifest)
 demo/            fictional projects for testing and screenshots
 ```
 
@@ -119,7 +121,9 @@ Changes are listed in the [CHANGELOG](CHANGELOG.md).
 
 Les tâches Gulp du projet dans une vue dédiée : les lancer, les arrêter, les relancer, et voir d'un coup d'œil lesquelles tournent, lesquelles ont échoué et à quelle adresse BrowserSync sert le site.
 
-*La capture en haut de page est réalisée sur les [projets de démonstration](demo/) : `default` tourne avec BrowserSync, `lint` a échoué.*
+![Gulp for VS Code : vue des tâches, URLs BrowserSync, terminal et indicateur de la barre d'état](docs/screenshot-fr.png)
+
+*Capture réalisée sur les [projets de démonstration](demo/) : `default` tourne avec BrowserSync, `lint` a échoué.*
 
 ## Fonctionnalités
 
@@ -135,6 +139,7 @@ Les tâches Gulp du projet dans une vue dédiée : les lancer, les arrêter, les
 - **Barre d'état** : un indicateur vert quand une tâche tourne, rouge en cas d'erreur, avec le détail en infobulle.
 - **Pastille sur l'icône Gulp** : le nombre de tâches en erreur, sinon le nombre de tâches en cours.
 - **Détection automatique** : la liste se met à jour quand un `gulpfile` est créé, modifié ou supprimé.
+- **Français et anglais** : l'interface suit la langue d'affichage de VS Code.
 
 ## Installation
 
@@ -147,7 +152,7 @@ code --install-extension digital-cover.gulp-for-vscode
 Ou depuis un paquet local, fourni dans [releases/](releases/) :
 
 ```bash
-code --install-extension releases/gulp-for-vscode-0.3.6.vsix
+code --install-extension releases/gulp-for-vscode-0.4.0.vsix
 ```
 
 ## Utilisation
@@ -173,8 +178,8 @@ Les boutons en haut de la vue rafraîchissent la liste des tâches et règlent l
 
 | Commande | Description |
 | --- | --- |
-| `Gulp : rafraîchir les tâches` | Relance la détection des tâches |
-| `Gulp : action au clic sur la barre d'état` | Choisit l'action du clic sur l'indicateur |
+| `Gulp: Rafraîchir les tâches` | Relance la détection des tâches |
+| `Gulp: Action au clic sur la barre d'état` | Choisit l'action du clic sur l'indicateur |
 
 ## Prérequis
 
@@ -199,6 +204,7 @@ src/
   view.js        vue webview de la barre latérale
   status.js      indicateur de la barre d'état
 media/           icônes, CSS et JS de la vue
+l10n/            traductions françaises (package.nls.*.json pour le manifeste)
 demo/            projets fictifs pour les tests et les captures
 ```
 

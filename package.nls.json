@@ -1,0 +1,11 @@
+{
+    "description": "Lists Gulp tasks, starts, stops and restarts them, with a clear status.",
+    "view.tasks": "Gulp Tasks",
+    "configuration.title": "Gulp for VS Code",
+    "config.statusBarClickAction": "Action when clicking the Gulp indicator in the status bar.",
+    "config.statusBarClickAction.view": "Show the extension's Gulp view",
+    "config.statusBarClickAction.terminal": "Show or hide the terminal of the running task",
+    "command.configureStatusBar": "Status Bar Click Action",
+    "command.statusBarClick": "Status Bar Click",
+    "command.refresh": "Refresh Tasks"
+}

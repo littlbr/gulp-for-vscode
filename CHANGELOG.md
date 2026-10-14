@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- Version anglaise de l'extension : l'interface suit la langue d'affichage de VS Code (anglais par défaut, français).
+- Captures du README en anglais et en français.
+
 ## 0.3.6
 
 - README en anglais, suivi de la version française.

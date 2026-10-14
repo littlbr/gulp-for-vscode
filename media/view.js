@@ -2,6 +2,8 @@
     const vscode = acquireVsCodeApi();
     const app = document.getElementById("app");
     let groups = [];
+    const strings = JSON.parse(app.dataset.strings || "{}");
+    const t = (key, ...args) => (strings[key] || key).replace(/\{(\d+)\}/g, (m, i) => args[i]);
 
     const ICONS = {
         play: '<path d="M5 3.5v9l7.5-4.5z" fill="currentColor"/>',
@@ -55,27 +57,27 @@
 
     function statusOf(task) {
         if (task.status === "running" && task.hasError) {
-            return { kind: "warning", text: "erreur de compilation" };
+            return { kind: "warning", text: t("compileError") };
         }
         if (task.status === "running") {
-            return { kind: "running", text: "en cours" };
+            return { kind: "running", text: t("running") };
         }
         if (task.status === "error") {
-            return { kind: "error", text: `erreur, code ${task.exitCode}` };
+            return { kind: "error", text: t("errorCode", task.exitCode) };
         }
-        return { kind: "idle", text: "arrêtée" };
+        return { kind: "idle", text: t("stopped") };
     }
 
     function urlRow(url) {
         const row = el("div", "url");
-        row.title = `Ouvrir ${url.url}`;
+        row.title = t("open", url.url);
         row.addEventListener("click", (e) => {
             e.stopPropagation();
             vscode.postMessage({ type: "openUrl", url: url.url });
         });
         row.appendChild(icon("globe"));
         row.appendChild(el("span", "url-address", url.url.replace(/^https?:\/\//, "").replace(/\/$/, "")));
-        row.appendChild(button("copy", "Copier l'adresse", () => vscode.postMessage({ type: "copyUrl", url: url.url }), "url-copy"));
+        row.appendChild(button("copy", t("copy"), () => vscode.postMessage({ type: "copyUrl", url: url.url }), "url-copy"));
         return row;
     }
 
@@ -84,7 +86,7 @@
         const running = task.status === "running";
         const node = el("section", `card is-${status.kind}`);
         node.tabIndex = 0;
-        node.title = running ? "Clic : afficher le terminal" : "Double clic : lancer la tâche";
+        node.title = running ? t("clickTerminal") : t("doubleClickStart");
         node.addEventListener("click", () => send("open", group, task));
         node.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
@@ -107,14 +109,14 @@
 
         const actions = el("div", "actions");
         if (running) {
-            actions.appendChild(button("terminal", "Afficher le terminal", () => send("terminal", group, task)));
-            actions.appendChild(button("restart", "Relancer", () => send("restart", group, task)));
-            actions.appendChild(button("stop", "Arrêter", () => send("stop", group, task), "danger"));
+            actions.appendChild(button("terminal", t("showTerminal"), () => send("terminal", group, task)));
+            actions.appendChild(button("restart", t("restart"), () => send("restart", group, task)));
+            actions.appendChild(button("stop", t("stop"), () => send("stop", group, task), "danger"));
         } else {
             if (task.status === "error") {
-                actions.appendChild(button("terminal", "Afficher le terminal", () => send("terminal", group, task)));
+                actions.appendChild(button("terminal", t("showTerminal"), () => send("terminal", group, task)));
             }
-            actions.appendChild(button("play", "Lancer", () => send("start", group, task), "primary"));
+            actions.appendChild(button("play", t("start"), () => send("start", group, task), "primary"));
         }
         head.appendChild(actions);
         node.appendChild(head);
@@ -135,10 +137,10 @@
         app.textContent = "";
         if (!groups.length) {
             const empty = el("div", "empty");
-            empty.appendChild(el("p", "", "Aucun gulpfile détecté dans ce dossier."));
+            empty.appendChild(el("p", "", t("empty")));
             const refresh = el("button", "text-button");
             refresh.appendChild(icon("refresh"));
-            refresh.appendChild(el("span", "", "Rafraîchir"));
+            refresh.appendChild(el("span", "", t("refresh")));
             refresh.addEventListener("click", () => vscode.postMessage({ type: "refresh" }));
             empty.appendChild(refresh);
             app.appendChild(empty);

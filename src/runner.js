@@ -182,7 +182,7 @@ class Runner {
     toggleTerminal() {
         const state = this.runningTasks()[0] || this.errorTasks()[0];
         if (!state) {
-            vscode.window.setStatusBarMessage("Aucune tâche Gulp en cours.", 3000);
+            vscode.window.setStatusBarMessage(vscode.l10n.t("No Gulp task running."), 3000);
             return;
         }
         this.showOutput(state.folder, state.name);

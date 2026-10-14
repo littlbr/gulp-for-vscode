@@ -1,8 +1,8 @@
 {
     "name": "gulp-for-vscode",
     "displayName": "Gulp for VS Code",
-    "description": "Liste les tâches Gulp, les lance, les arrête et les relance, avec un statut clair.",
-    "version": "0.3.6",
+    "description": "%description%",
+    "version": "0.4.0",
     "publisher": "digital-cover",
     "author": { "name": "Martin Vauchel", "url": "https://github.com/littlbr" },
     "homepage": "https://github.com/littlbr/gulp-for-vscode#readme",
@@ -14,6 +14,7 @@
     "categories": ["Other"],
     "keywords": ["gulp", "task", "runner", "watch"],
     "main": "./src/extension.js",
+    "l10n": "./l10n",
     "activationEvents": ["onStartupFinished"],
     "scripts": {
         "package": "npx @vscode/vsce package --out releases/"
@@ -26,28 +27,28 @@
         },
         "views": {
             "gulpRunner": [
-                { "id": "gulpRunner.tasks", "name": "Tâches Gulp", "type": "webview" }
+                { "id": "gulpRunner.tasks", "name": "%view.tasks%", "type": "webview" }
             ]
         },
         "configuration": {
-            "title": "Gulp for VS Code",
+            "title": "%configuration.title%",
             "properties": {
                 "gulpRunner.statusBarClickAction": {
                     "type": "string",
                     "enum": ["view", "terminal"],
                     "enumDescriptions": [
-                        "Afficher la vue Gulp de l'extension",
-                        "Afficher ou masquer le terminal de la tâche en cours"
+                        "%config.statusBarClickAction.view%",
+                        "%config.statusBarClickAction.terminal%"
                     ],
                     "default": "view",
-                    "description": "Action au clic sur l'indicateur Gulp de la barre d'état."
+                    "description": "%config.statusBarClickAction%"
                 }
             }
         },
         "commands": [
-            { "command": "gulpRunner.configureStatusBar", "title": "Gulp : action au clic sur la barre d'état", "icon": "$(gear)" },
-            { "command": "gulpRunner.statusBarClick", "title": "Gulp : clic sur la barre d'état" },
-            { "command": "gulpRunner.refresh", "title": "Gulp : rafraîchir les tâches", "icon": "$(refresh)" }
+            { "command": "gulpRunner.configureStatusBar", "title": "%command.configureStatusBar%", "category": "Gulp", "icon": "$(gear)" },
+            { "command": "gulpRunner.statusBarClick", "title": "%command.statusBarClick%", "category": "Gulp" },
+            { "command": "gulpRunner.refresh", "title": "%command.refresh%", "category": "Gulp", "icon": "$(refresh)" }
         ],
         "menus": {
             "view/title": [

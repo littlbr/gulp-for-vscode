@@ -1,0 +1,11 @@
+{
+    "description": "Liste les tâches Gulp, les lance, les arrête et les relance, avec un statut clair.",
+    "view.tasks": "Tâches Gulp",
+    "configuration.title": "Gulp for VS Code",
+    "config.statusBarClickAction": "Action au clic sur l'indicateur Gulp de la barre d'état.",
+    "config.statusBarClickAction.view": "Afficher la vue Gulp de l'extension",
+    "config.statusBarClickAction.terminal": "Afficher ou masquer le terminal de la tâche en cours",
+    "command.configureStatusBar": "Action au clic sur la barre d'état",
+    "command.statusBarClick": "Clic sur la barre d'état",
+    "command.refresh": "Rafraîchir les tâches"
+}
